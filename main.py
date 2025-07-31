@@ -1,9 +1,10 @@
 import yfinance as yf
 import requests
 import time
+import os
 
-TELEGRAM_TOKEN = "7392041404:AAHd8I9GbmHuxwCyPYvERrsYRHxxFFzQ6aI"
-CHAT_ID = "7972573003"
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
+CHAT_ID = os.getenv("CHAT_ID")
 
 def send_telegram_message(message):
     requests.post(
@@ -31,7 +32,9 @@ def check_rsi_signal(ticker):
 
 TICKERS = ["NVDA", "AAPL", "TSLA", "AMD", "MSFT", "AMZN"]
 
+send_telegram_message("✅ Bot wurde erfolgreich gestartet.")
+
 while True:
     for sym in TICKERS:
         check_rsi_signal(sym)
-    time.sleep(1800)  # Pause von 30 Minuten
+    time.sleep(1800)
